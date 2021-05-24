@@ -10,7 +10,7 @@
     <br>
     <h2>Edit Memo</h2>
     <label>
-      <textarea rows="10" cols="30" v-model="memoForm" id="target"></textarea>
+      <textarea rows="10" cols="30" v-model="memoForm"></textarea>
     </label>
     <br>
     <a class="border-button" v-on:click="addMemo()">Save</a> <a class="border-button" v-on:click="deleteMemo()">Delete</a>
@@ -40,13 +40,13 @@ export default {
 
   methods: {
     showMemo(i) {
-      document.getElementById('target').value = this.memos[i]
+      this.memoForm = this.memos[i]
       this.memoIndex = i
       this.editFlag = true
     },
 
     newMemo() {
-      document.getElementById('target').value = ''
+      this.memoForm = ''
       this.editFlag = false
     },
 
