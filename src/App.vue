@@ -22,8 +22,7 @@ export default {
   data() {
     return {
       memos: [],
-      memoIndex: null,
-      editFlag: false,
+      selectedMemoIndex: null,
       memoForm: '',
     }
   },
@@ -41,13 +40,12 @@ export default {
   methods: {
     showMemo(i) {
       this.memoForm = this.memos[i]
-      this.memoIndex = i
-      this.editFlag = true
+      this.selectedMemoIndex = i
     },
 
     newMemo() {
       this.memoForm = ''
-      this.editFlag = false
+      this.selectedMemoIndex = null
     },
 
     addMemo() {
@@ -55,26 +53,24 @@ export default {
         return
       }
 
-      if (this.editFlag) {
-        this.memos[this.memoIndex] = this.memoForm
-        this.memoIndex = null
+      if (this.selectedMemoIndex !== null) {
+        this.memos[this.selectedMemoIndex] = this.memoForm
+        this.selectedMemoIndex = null
       }
       else {
         this.memos.push(this.memoForm)
       }
       this.saveMemo()
       this.memoForm = ''
-      this.editFlag = false
     },
 
     deleteMemo() {
-      if (this.editFlag) {
-        this.memos.splice(this.memoIndex, 1)
+      if (this.selectedMemoIndex !== null) {
+        this.memos.splice(this.selectedMemoIndex, 1)
         this.saveMemo()
       }
       this.memoForm = ''
-      this.memoIndex = null
-      this.editFlag = false
+      this.selectedMemoIndex = null
     },
 
     saveMemo() {
